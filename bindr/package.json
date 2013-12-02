@@ -1,0 +1,15 @@
+{
+  "name": "bindr",
+  "version": "0.0.0",
+  "description": "bindr",
+  "main": "app.js",
+  "author": {
+    "name": "Jed Hunsaker",
+    "email": "jed.hunsaker@gmail.com"
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "jade": "*",
+    "stylus": "*"
+  }
+}
