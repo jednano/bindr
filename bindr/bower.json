@@ -1,0 +1,20 @@
+{
+  "name": "bindr",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jedhunsaker/bindr",
+  "authors": [
+    "Jed Hunsaker <jed.hunsaker–gmail>"
+  ],
+  "description": "Node.js Express template binding service.",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "knockoutjs": "https://github.com/knockout/knockout/releases/download/v3.0.0/knockout-3.0.0.js"
+  },
+  "devDependencies": {
+    "dt-mocha": "~1.9.0",
+    "dt-node": "https://github.com/jedhunsaker/dt-node.git",
+    "dt-sinon": "~1.5.0",
+    "dt-sinon-chai": "~2.4.0"
+  }
+}

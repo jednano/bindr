@@ -1,15 +1,32 @@
 {
   "name": "bindr",
-  "version": "0.0.0",
-  "description": "bindr",
+  "version": "0.0.1",
+  "description": "Node.js Express template binding service.",
   "main": "app.js",
   "author": {
     "name": "Jed Hunsaker",
     "email": "jed.hunsaker@gmail.com"
   },
+  "scripts": {
+    "start": "node app.js",
+    "test": "grunt test"
+  },
   "dependencies": {
     "express": "3.4.4",
+    "extend": "~1.2.1",
+    "handlebars": "~1.1.2",
     "jade": "*",
+    "jsdom": "~0.8.9",
     "stylus": "*"
+  },
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-mocha-test": "~0.8.1",
+    "grunt-typescript": "~0.2.4",
+    "sinon": "~1.7.3",
+    "sinon-chai": "~2.4.0"
   }
 }

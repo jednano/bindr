@@ -29,22 +29,40 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app.js" />
+    <Compile Include="engines\ko.js" />
+    <Compile Include="engines\knockout.js" />
+    <Compile Include="engines\hbs.js" />
+    <Compile Include="engines\handlebars.js" />
+    <Compile Include="engines\volusion\handlebars.js" />
+    <Compile Include="engines\volusion\hbs.js" />
+    <Compile Include="Gruntfile.js" />
+    <Compile Include="lib\templateBinder.js" />
     <Compile Include="routes\index.js" />
-    <Compile Include="routes\user.js" />
+    <Content Include=".bowerrc" />
+    <Content Include="app.js" />
+    <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
+    <Content Include="test\index.ts" />
+    <Content Include="test\lib\templateBinder.ts" />
+    <Content Include="test\lib\chai.ts" />
+    <Content Include="test\lib\index.ts" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="engines\" />
+    <Folder Include="engines\volusion\" />
+    <Folder Include="lib\" />
+    <Folder Include="test\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
+    <Folder Include="test\lib\" />
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
