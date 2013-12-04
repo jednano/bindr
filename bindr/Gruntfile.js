@@ -2,7 +2,7 @@
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		clean: tsFiles.filter(function(glob) {
+		clean: tsFiles.map(function(glob) {
 			return glob.replace(/\.ts$/, '.js');
 		}),
 		typescript: {
