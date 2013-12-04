@@ -3,6 +3,8 @@
 
 node_modules/
 vendor/
+*.js
+!Gruntfile.js
 
 # User-specific files
 *.suo
