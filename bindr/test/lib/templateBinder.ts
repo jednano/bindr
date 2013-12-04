@@ -8,7 +8,7 @@ var expect: chai.ExpectStatic = _chai.expect;
 // ReSharper disable WrongExpressionStatement
 describe('Template Binder', () => {
 
-	it('does stuff', () => {
+	it('binds templates', () => {
 		expect(true).to.be.true;
 	});
 

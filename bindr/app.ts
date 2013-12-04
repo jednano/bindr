@@ -1,21 +1,26 @@
+///<reference path='./vendor/dt-node/node.d.ts'/>
+///<reference path='./vendor/dt-express/express.d.ts'/>
+///<reference path='./routes/index.ts'/>
+
 
 /**
  * Module dependencies.
  */
 
 var express = require('express');
-var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+import routes = require('./routes/index');
 
-var allowCrossDomain = function(req, res, next) {
+
+var allowCrossDomain = (req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'POST');
 	res.header('Access-Control-Allow-Headers', 'Content-Type');
 	next();
 };
 
-var app = express();
+var app: ExpressApplication = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -39,6 +44,6 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.post('/bind', routes.bind);
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), () => {
 	console.log('Express server listening on port ' + app.get('port'));
 });

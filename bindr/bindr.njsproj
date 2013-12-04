@@ -12,14 +12,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c82a1148-2c21-46fe-9842-8ad2318aafe4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>app.ts</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <NodejsPort>1337</NodejsPort>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -29,19 +29,17 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="engines\ko.js" />
-    <Compile Include="engines\knockout.js" />
-    <Compile Include="engines\hbs.js" />
-    <Compile Include="engines\handlebars.js" />
-    <Compile Include="engines\volusion\handlebars.js" />
-    <Compile Include="engines\volusion\hbs.js" />
+    <Compile Include="engines\knockout.ts" />
+    <Compile Include="engines\handlebars.ts" />
+    <Compile Include="engines\volusion\handlebars.ts" />
     <Compile Include="Gruntfile.js" />
-    <Compile Include="lib\templateBinder.js" />
-    <Compile Include="routes\index.js" />
+    <Compile Include="lib\templateBinder.ts" />
+    <Compile Include="routes\index.ts" />
     <Content Include=".bowerrc" />
     <Content Include=".editorconfig" />
-    <Content Include="app.js" />
+    <Content Include="app.ts" />
     <Content Include="bower.json" />
+    <Content Include="watch" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
@@ -65,6 +63,7 @@
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="install" />
     <Content Include="Web.config" />
     <Content Include="Web.cloud.config" />
     <Content Include="bin\ChangeConfig.ps1" />

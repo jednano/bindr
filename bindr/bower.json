@@ -12,6 +12,7 @@
     "knockoutjs": "https://github.com/knockout/knockout/releases/download/v3.0.0/knockout-3.0.0.js"
   },
   "devDependencies": {
+    "dt-express": "*",
     "dt-mocha": "~1.9.0",
     "dt-node": "https://github.com/jedhunsaker/dt-node.git",
     "dt-sinon": "~1.5.0",

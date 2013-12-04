@@ -2,10 +2,12 @@
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		clean: ['test/**/*.js'],
+		clean: tsFiles.filter(function(glob) {
+			return glob.replace(/\.ts$/, '.js');
+		}),
 		typescript: {
 			base: {
-				src: ['test/**/*.ts'],
+				src: tsFiles,
 				dest: '',
 				options: {
 					module: 'commonjs',
@@ -40,3 +42,10 @@
 	grunt.registerTask('build', ['clean', 'typescript']);
 
 };
+
+var tsFiles = [
+	'app.ts',
+	'routes/**/*.ts',
+	'lib/**/*.ts',
+	'test/**/*.ts'
+];
