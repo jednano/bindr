@@ -37,14 +37,14 @@
     <Compile Include="routes\index.ts" />
     <Content Include=".bowerrc" />
     <Content Include=".editorconfig" />
-    <Content Include="app.ts" />
+    <Compile Include="app.ts" />
     <Content Include="bower.json" />
     <Content Include="watch" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
-    <Content Include="test\lib\templateBinder.ts" />
-    <Content Include="test\lib\chai.ts" />
+    <Compile Include="test\lib\templateBinder.ts" />
+    <Compile Include="test\lib\chai.ts" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
   </ItemGroup>

@@ -1,17 +1,12 @@
 ﻿///<reference path='../vendor/dt-node/node.d.ts'/>
-
-
+///<reference path='../vendor/dt-express/express.d.ts'/>
 var extend = require('extend');
 
 
-export function bindTemplates(request: BindRequest, response: any) {
+export function bindTemplates(request: ExpressServerRequest, response: ExpressServerResponse) {
 	var templateBinder = new TemplateBinder(response);
 	templateBinder.bindTemplates(request.body);
 	return templateBinder.boundTemplates;
-}
-
-export interface BindRequest {
-	body: string;
 }
 
 interface BindRequestBody {
@@ -53,7 +48,7 @@ interface Promise {
 }
 
 class TemplateBinder implements BindRequestBody {
-	private response: any;
+	private response: ExpressServerResponse;
 	private engines = {};
 	private isValid: boolean;
 	private hash: BindRequestBody;
@@ -63,7 +58,7 @@ class TemplateBinder implements BindRequestBody {
 	source: string;
 	boundTemplates = {};
 
-	constructor(response: any) {
+	constructor(response: ExpressServerResponse) {
 		this.response = response;
 	}
 

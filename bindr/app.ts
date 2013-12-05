@@ -13,7 +13,7 @@ var path = require('path');
 import routes = require('./routes/index');
 
 
-var allowCrossDomain = (req, res, next) => {
+var allowCrossDomain = (req: ExpressServerRequest, res: ExpressServerResponse, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'POST');
 	res.header('Access-Control-Allow-Headers', 'Content-Type');
