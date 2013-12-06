@@ -1,35 +1,24 @@
-///<reference path='../vendor/dt-node/node.d.ts'/>
+import base = require('./base');
 
 
-var jsdom = require('jsdom');
-var fs = require('fs');
+export class Knockout extends base.TemplatingEngineLoader {
+	constructor() {
+		super(KnockoutEngine, './vendor/knockoutjs/index.js');
+	}
+}
 
+export class KnockoutEngine extends base.TemplatingEngine {
+	ko: any;
 
-jsdom.defaultDocumentFeatures = {
-	FetchExternalResources: false,
-	ProcessExternalResources: false
-};
+	constructor() {
+		super();
+		this.ko = this.window.ko;
+	}
 
-fs.readFile('../lib/vendor/knockoutjs/index.js',
-	{
-		encoding: 'utf-8'
-	},
-	(err, knockoutjs) => {
-		jsdom.env({
-			html: '<html><body></body></html>',
-			src: [knockoutjs],
-			done: (errors, window) => {
-				exports = {
-					compile: source => {
-						return {
-							done: data => {
-								var doc = jsdom.jsdom(source);
-								return window.ko.applyBindings(data, doc);
-							}
-						};
-					}
-				};
-			}
+	compile(source: string, callback: Function) {
+		var doc = this.helpers.createDocumentFragment(source);
+		callback(data => {
+			return this.ko.applyBindings(data, doc);
 		});
 	}
-);
+}

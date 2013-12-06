@@ -39,12 +39,17 @@
     <Content Include=".editorconfig" />
     <Compile Include="app.ts" />
     <Content Include="bower.json" />
+    <Compile Include="engines\base.ts" />
+    <Content Include="test\chai.ts" />
+    <Content Include="test\common.ts" />
+    <Content Include="test\engines\handlebars.ts" />
+    <Content Include="test\engines\knockout.ts" />
+    <Content Include="test\engines\volusion\handlebars.ts" />
     <Content Include="watch" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Compile Include="test\lib\templateBinder.ts" />
-    <Compile Include="test\lib\chai.ts" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
   </ItemGroup>
@@ -59,6 +64,8 @@
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
+    <Folder Include="test\engines\" />
+    <Folder Include="test\engines\volusion\" />
     <Folder Include="test\lib\" />
     <Folder Include="views\" />
   </ItemGroup>
