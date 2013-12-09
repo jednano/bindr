@@ -6,12 +6,9 @@ import _Knockout = require('../../engines/knockout');
 var Knockout = _Knockout.Knockout;
 
 
-var engine;
-before(done => {
-	new Knockout().load(e => {
-		engine = e;
-		done();
-	});
+var ko;
+before(() => {
+	ko = new Knockout();
 });
 
 // ReSharper disable WrongExpressionStatement
@@ -22,7 +19,7 @@ describe('Knockout Templating Engine', () => {
 		var context = { name: { first: 'Jed' } };
 		var expectedResult = '<p data-bind="text: name.first">Jed</p>';
 
-		engine.compile(source, template => {
+		ko.compile(source, template => {
 			expect(template(context)).to.equal(expectedResult);
 			done();
 		});

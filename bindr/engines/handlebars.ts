@@ -3,14 +3,12 @@ var handlebars: HandlebarsStatic = require('../node_modules/handlebars');
 import base = require('./base');
 
 
-export class Handlebars extends base.TemplatingEngineLoader {
-	constructor(engineClass?: typeof base.TemplatingEngine, scriptPath?: string) {
-		super(engineClass || HandlebarsEngine, scriptPath);
-	}
-}
-
-export class HandlebarsEngine extends base.TemplatingEngine {
+export class Handlebars extends base.TemplatingEngine {
 	hb = handlebars;
+
+	constructor(scriptPath?: string) {
+		super(scriptPath);
+	}
 
 	compile(source: string, callback: Function) {
 		callback(this.hb.compile(source));

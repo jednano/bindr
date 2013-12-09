@@ -6,12 +6,9 @@ import _Handlebars = require('../../engines/handlebars');
 var Handlebars = _Handlebars.Handlebars;
 
 
-var engine;
-before(done => {
-	new Handlebars().load(e => {
-		engine = e;
-		done();
-	});
+var hb;
+before(() => {
+	hb = new Handlebars();
 });
 
 // ReSharper disable WrongExpressionStatement
@@ -22,7 +19,7 @@ describe('Handlebars Templating Engine', () => {
 		var context = { name: { first: 'Jed' } };
 		var expectedResult = '<p>Jed</p>';
 
-		engine.compile(source, template => {
+		hb.compile(source, template => {
 			expect(template(context)).to.equal(expectedResult);
 			done();
 		});
