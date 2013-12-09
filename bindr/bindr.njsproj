@@ -30,8 +30,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="engines\knockout.ts" />
-    <Compile Include="engines\handlebars.ts" />
-    <Compile Include="engines\volusion\handlebars.ts" />
+    <Compile Include="engines\node\handlebars.ts" />
+    <Compile Include="engines\volusion\node\handlebars.ts" />
     <Compile Include="Gruntfile.js" />
     <Compile Include="lib\templateBinder.ts" />
     <Compile Include="routes\index.ts" />
@@ -40,11 +40,15 @@
     <Compile Include="app.ts" />
     <Content Include="bower.json" />
     <Compile Include="engines\base.ts" />
+    <Content Include="engines\handlebars.ts" />
+    <Content Include="engines\node\swig.ts" />
     <Content Include="test\chai.ts" />
     <Content Include="test\common.ts" />
+    <Content Include="test\engines\node\swig.ts" />
+    <Content Include="test\engines\node\handlebars.ts" />
     <Content Include="test\engines\handlebars.ts" />
     <Content Include="test\engines\knockout.ts" />
-    <Content Include="test\engines\volusion\handlebars.ts" />
+    <Content Include="test\engines\volusion\node\handlebars.ts" />
     <Content Include="watch" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
@@ -56,7 +60,9 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="engines\" />
+    <Folder Include="engines\node\" />
     <Folder Include="engines\volusion\" />
+    <Folder Include="engines\volusion\node\" />
     <Folder Include="lib\" />
     <Folder Include="test\" />
     <Folder Include="public\" />
@@ -65,7 +71,9 @@
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
     <Folder Include="test\engines\" />
+    <Folder Include="test\engines\node\" />
     <Folder Include="test\engines\volusion\" />
+    <Folder Include="test\engines\volusion\node\" />
     <Folder Include="test\lib\" />
     <Folder Include="views\" />
   </ItemGroup>
