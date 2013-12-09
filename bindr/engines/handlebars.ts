@@ -1,16 +1,16 @@
-///<reference path='../vendor/dt-handlebars/handlebars.d.ts'/>
-var handlebars: HandlebarsStatic = require('../node_modules/handlebars');
 import base = require('./base');
 
 
 export class Handlebars extends base.TemplatingEngine {
-	hb = handlebars;
-
 	constructor(scriptPath?: string) {
-		super(scriptPath);
+		super(scriptPath || './vendor/handlebars/handlebars.js');
 	}
-
 	compile(source: string, callback: Function) {
-		callback(this.hb.compile(source));
+		this.load('<html><body></body></html>', window => {
+			var template = window.Handlebars.compile(source);
+			callback(context => {
+				return template(context);
+			});
+		});
 	}
 }

@@ -1,8 +1,8 @@
-﻿///<reference path='../../common.ts'/>
-///<reference path='../../../engines/volusion/handlebars.ts'/>
-import _chai = require('../../chai');
+﻿///<reference path='../../../common.ts'/>
+///<reference path='../../../../engines/volusion/node/handlebars.ts'/>
+import _chai = require('../../../chai');
 var expect: chai.ExpectStatic = _chai.expect;
-import _Handlebars = require('../../../engines/volusion/handlebars');
+import _Handlebars = require('../../../../engines/volusion/node/handlebars');
 var Handlebars = _Handlebars.Handlebars;
 
 

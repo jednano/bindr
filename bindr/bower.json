@@ -17,6 +17,7 @@
     "dt-node": "https://github.com/jedhunsaker/dt-node.git",
     "dt-sinon": "~1.5.0",
     "dt-sinon-chai": "~2.4.0",
-    "dt-handlebars": "*"
+    "dt-handlebars": "*",
+    "handlebars": "~1.1.2"
   }
 }
