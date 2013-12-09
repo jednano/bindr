@@ -3,11 +3,6 @@ var jsdom = require('jsdom');
 var fs = require('fs');
 
 
-jsdom.defaultDocumentFeatures = {
-	FetchExternalResources: false,
-	ProcessExternalResources: false
-};
-
 export class TemplatingEngineLoader {
 	private scriptPath: string;
 	private loadCallback: Function;
@@ -33,6 +28,10 @@ export class TemplatingEngineLoader {
 			jsdom.env({
 				html: '<html><body></body></html>',
 				src: [lib],
+				//features: {
+				//	FetchExternalResources: false,
+				//	ProcessExternalResources: false
+				//},
 				done: (errors, window) => {
 					this.loadCallback(new this.Engine(window));
 				}
@@ -45,7 +44,7 @@ export class TemplatingEngine {
 	window: any;
 	helpers = {
 		createDocumentFragment: (source: string) => {
-			return jsdom.jsdom(source);
+			return jsdom.jsdom(source).firstChild;
 		}
 	};
 

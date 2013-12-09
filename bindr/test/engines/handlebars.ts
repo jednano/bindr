@@ -16,14 +16,14 @@ before(done => {
 
 // ReSharper disable WrongExpressionStatement
 describe('Handlebars Templating Engine', () => {
-	
+
 	it('handles basic template binding', done => {
 		var source = '<p>{{name.first}}</p>';
-		var data = { name: { first: 'Jed' } };
+		var context = { name: { first: 'Jed' } };
 		var expectedResult = '<p>Jed</p>';
 
 		engine.compile(source, template => {
-			expect(template(data)).to.equal(expectedResult);
+			expect(template(context)).to.equal(expectedResult);
 			done();
 		});
 	});

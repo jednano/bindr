@@ -10,12 +10,7 @@ export class Handlebars extends base.TemplatingEngineLoader {
 }
 
 export class HandlebarsEngine extends base.TemplatingEngine {
-	hb: any;
-
-	constructor() {
-		super();
-		this.hb = handlebars;
-	}
+	hb = handlebars;
 
 	compile(source: string, callback: Function) {
 		callback(this.hb.compile(source));
