@@ -9,7 +9,8 @@
   "main": "app.js",
   "license": "MIT",
   "dependencies": {
-    "knockoutjs": "https://github.com/knockout/knockout/releases/download/v3.0.0/knockout-3.0.0.js"
+    "knockoutjs": "https://github.com/knockout/knockout/releases/download/v3.0.0/knockout-3.0.0.js",
+    "swig": "~1.2.2"
   },
   "devDependencies": {
     "dt-express": "*",

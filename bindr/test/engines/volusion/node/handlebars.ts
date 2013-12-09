@@ -6,23 +6,21 @@ import _Handlebars = require('../../../../engines/volusion/node/handlebars');
 var Handlebars = _Handlebars.Handlebars;
 
 
-var hb;
-before(() => {
-	hb = new Handlebars();
-});
+describe('volusion/node/handlebars templating engine', () => {
 
-// ReSharper disable WrongExpressionStatement
-describe('Handlebars Templating Engine', () => {
+	var hb;
+	before(() => {
+		hb = new Handlebars();
+	});
 
-	it('renders link_to', done => {
-		var context = { posts: [{ url: '/hello-world', body: 'Hello World!' }] };
-		var source = "<ul>{{#posts}}<li>{{{link_to}}}</li>{{/posts}}</ul>";
-		var expectedResult = '<ul><li><a href="/hello-world">Hello World!</a></li></ul>';
+	it('supports link_to helper', done => {
+		var context = { url: '#foo', body: 'bar' };
+		var source = '{{{link_to}}}';
+		var expectedResult = '<a href="#foo">bar</a>';
 
 		hb.compile(source, template => {
 			expect(template(context)).to.equal(expectedResult);
 			done();
 		});
 	});
-
 });

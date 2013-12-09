@@ -6,23 +6,13 @@ import _Knockout = require('../../engines/knockout');
 var Knockout = _Knockout.Knockout;
 
 
-var ko;
-before(() => {
-	ko = new Knockout();
-});
+it('supports knockout templating engine', done => {
+	var source = '<p data-bind="text: foo"></p>';
+	var context = { foo: 'bar' };
+	var expectedResult = '<p data-bind="text: foo">bar</p>';
 
-// ReSharper disable WrongExpressionStatement
-describe('Knockout Templating Engine', () => {
-
-	it('handles basic template binding', done => {
-		var source = '<p data-bind="text: name.first"></p>';
-		var context = { name: { first: 'Jed' } };
-		var expectedResult = '<p data-bind="text: name.first">Jed</p>';
-
-		ko.compile(source, template => {
-			expect(template(context)).to.equal(expectedResult);
-			done();
-		});
+	new Knockout().compile(source, template => {
+		expect(template(context)).to.equal(expectedResult);
+		done();
 	});
-
 });

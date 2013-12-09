@@ -20,7 +20,7 @@ export class TemplatingEngine {
 				throw err;
 			}
 			jsdom.env({
-				html: source,
+				html: source || '<html><body></body></html>',
 				src: [lib],
 				//features: {
 				//	FetchExternalResources: false,

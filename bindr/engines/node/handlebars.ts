@@ -1,10 +1,11 @@
 ///<reference path='../../vendor/dt-handlebars/handlebars.d.ts'/>
-var handlebars: HandlebarsStatic = require('../../node_modules/handlebars');
 import base = require('../base');
+var hb: HandlebarsStatic = require('handlebars');
 
 
 export class Handlebars extends base.TemplatingEngine {
-	hb = handlebars;
+
+	hb = hb;
 
 	constructor(scriptPath?: string) {
 		super(scriptPath);
