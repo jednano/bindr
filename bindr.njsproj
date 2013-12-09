@@ -38,6 +38,9 @@
     <Content Include=".bowerrc" />
     <Content Include=".editorconfig" />
     <Compile Include="app.ts" />
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Compile Include="engines\base.ts" />
     <Content Include="engines\handlebars.ts" />
