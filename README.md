@@ -1,4 +1,4 @@
-﻿[![Build Status][]]](http://travis-ci.org/jedmao/bindr)
+﻿[![Build Status][]](http://travis-ci.org/jedmao/bindr)
 
 # bindr
 Bindr is a [node.js][] service that handles template binding and nothing else.
