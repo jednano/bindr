@@ -45,6 +45,7 @@
     <Compile Include="engines\base.ts" />
     <Content Include="engines\handlebars.ts" />
     <Content Include="engines\node\swig.ts" />
+    <Content Include="CONTRIBUTING.md" />
     <Content Include="test\chai.ts" />
     <Content Include="test\common.ts" />
     <Content Include="test\engines\node\swig.ts" />
