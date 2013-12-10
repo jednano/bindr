@@ -53,7 +53,7 @@ After template binding, the result would be the following HTML:
 Using the exact same JavaScript templating library on both the back and the
 front end enables you to do things you couldn't necessarily do before.
 
-## Proper separation of concerns
+### Proper separation of concerns
 Your UI and your data should not be in the same file. This is pretty standard
 on the back end, but maybe your templating engine you use on the back end isn't
 available on the front end. Even if somebody made a JavaScript port of your
@@ -62,14 +62,14 @@ between the two. What if one works perfectly well, but the other has a bug? Now
 you're writing in two different templating languages and you have to make
 decisions about which templates you want to run on the front vs. the back end.
 
-## Eliminate duplication of efforts
+### Eliminate duplication of efforts
 A new product specification comes in that requires you to move some logic from
 the back to the front end or vice versa. This is a maintenance nightmare! Not
 with bindr! Bindr enables you to write your template once in your favorite
 JavaScript templating engine and use it on the front or back end,
 interchangeably. The choice is yours.
 
-## Initial page load performance
+### Initial page load performance
 [Single-page application][] (SPA) frameworks like [Ember.js][] and [AngularJS][]
 are all the rage now, and for good reason! One problem with Ember, however, is
 that it has the potential to cause some major performance hits when your
