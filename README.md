@@ -63,12 +63,12 @@ front end enables you to do things you couldn't necessarily do before.
 
 Surely, we can all agree that your UI and your data do not belong in the same
 file. This is pretty standard on the back end, but more often than not, the
-templating engine you use on the back end isn't available on the front end. If
-you're using a separate templating engine on the front end then you have to make
+template engine you use on the back end isn't available on the front end. If
+you're using a separate template engine on the front end then you have to make
 decisions about which templates you want to run on the front end vs. the back
 end and use the appropriate templating language.
 
-Even if somebody made a JavaScript port of your favorite templating engine or
+Even if somebody made a JavaScript port of your favorite template engine or
 vice versa, these are two separate code bases. You run the risk of discrepancies
 between the two. What if one works perfectly well, but the other has a bug?
 
@@ -78,17 +78,17 @@ between the two. What if one works perfectly well, but the other has a bug?
 A new product specification comes in that requires you to move some logic from
 the back to the front end or vice versa. This is a maintenance nightmare! Not
 with bindr! Bindr enables you to write your template once in your favorite
-JavaScript templating engine and use it on the front or back end,
+JavaScript template engine and use it on the front or back end,
 interchangeably. The choice is yours.
 
 
 ### Initial page load performance
 
-Some templating engine syntaxes like [Knockout][] and [AngularJS][] are valid
+Some template engine syntaxes like [Knockout][] and [AngularJS][] are valid
 HTML out of the box. This allows the UI to render even before the application is
 bootstrapped. Other engines, however, like the popular [Handlebars.js][], are
 not valid HTML. This is no knock on Handlebars. It's actually my preferred
-templating engine at the moment. Handlebars, however, needs to wait until the
+template engine at the moment. Handlebars, however, needs to wait until the
 template binding is complete before the UI can render its contents. If you're
 serving a [Single-page application][] (SPA) then your whole page would be a
 template with more templates inside of it, making JavaScript solely responsible
