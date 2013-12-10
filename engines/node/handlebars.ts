@@ -7,10 +7,6 @@ export class Handlebars extends base.TemplatingEngine {
 
 	hb = hb;
 
-	constructor(scriptPath?: string) {
-		super(scriptPath);
-	}
-
 	compile(source: string, callback: Function) {
 		callback(this.hb.compile(source));
 	}
