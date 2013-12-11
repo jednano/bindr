@@ -9,7 +9,7 @@ it('supports node/liquid templating engine', done => {
 	new Liquid().compile('{{foo}}', template => {
 		template({ foo: 'bar' }).done(html => {
 			expect(html).to.equal('bar');
+			done();
 		});
-		done();
 	});
 });
