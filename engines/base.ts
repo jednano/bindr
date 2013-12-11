@@ -1,14 +1,12 @@
 ///<reference path='../vendor/dt-node/node.d.ts'/>
+import Promises = require('../lib/Promises');
 var jsdom = require('jsdom');
 var fs = require('fs');
 
 
 export class TemplatingEngine {
 
-	private scriptPath: string;
-
-	constructor(scriptPath?: string) {
-		this.scriptPath = scriptPath;
+	constructor(private scriptPath?: string) {
 	}
 
 	load(source: string, callback: Function) {
@@ -22,10 +20,10 @@ export class TemplatingEngine {
 			jsdom.env({
 				html: source || '<html><body></body></html>',
 				src: [lib],
-				//features: {
-				//	FetchExternalResources: false,
-				//	ProcessExternalResources: false
-				//},
+				features: {
+					FetchExternalResources: false,
+					ProcessExternalResources: false
+				},
 				done: (errors, window) => {
 					callback(window);
 				}
