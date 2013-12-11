@@ -28,11 +28,11 @@ export class Knockout extends base.TemplatingEngine {
 	}
 
 	private onRender(context: {}): Promises.Promise {
-		var willRender = new Deferred();
+		var rendering = new Deferred();
 		setTimeout(() => {
 			this.ko.applyBindings(context);
-			willRender.resolve(this._body.innerHTML);
+			rendering.resolve(this._body.innerHTML);
 		});
-		return willRender.promise;
+		return rendering.promise;
 	}
 }

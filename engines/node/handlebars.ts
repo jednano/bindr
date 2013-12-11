@@ -12,20 +12,20 @@ export class Handlebars extends base.TemplatingEngine {
 
 	compile(source: string): Promises.Promise {
 		this._render = this.hb.compile(source);
-		var willCompile = new Deferred();
+		var compiling = new Deferred();
 		setTimeout(() => {
-			willCompile.resolve({
+			compiling.resolve({
 				render: this.onRender.bind(this)
 			});
 		});
-		return willCompile.promise;
+		return compiling.promise;
 	}
 
 	private onRender(context: {}): Promises.Promise {
-		var willRender = new Deferred();
+		var rendering = new Deferred();
 		setTimeout(() => {
-			willRender.resolve(this._render(context));
+			rendering.resolve(this._render(context));
 		});
-		return willRender.promise;
+		return rendering.promise;
 	}
 }

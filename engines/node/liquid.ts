@@ -9,10 +9,10 @@ export class Liquid extends base.TemplatingEngine {
 	liquid = liquid;
 
 	compile(source: string): Promises.Promise {
-		var willCompile = new Deferred();
+		var compiling = new Deferred();
 		setTimeout(() => {
-			willCompile.resolve(this.liquid.Template.parse(source));
+			compiling.resolve(this.liquid.Template.parse(source));
 		});
-		return willCompile.promise;
+		return compiling.promise;
 	}
 }
