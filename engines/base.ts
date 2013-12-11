@@ -1,7 +1,8 @@
 ///<reference path='../vendor/dt-node/node.d.ts'/>
-import Promises = require('../lib/Promises');
 var jsdom = require('jsdom');
 var fs = require('fs');
+import Promises = require('../lib/Promises');
+var Deferred = Promises.Deferred;
 
 
 export class TemplatingEngine {
@@ -9,10 +10,11 @@ export class TemplatingEngine {
 	constructor(private scriptPath?: string) {
 	}
 
-	load(source: string, callback: Function) {
+	load(source?: string): Promises.Promise {
 		if (!this.scriptPath) {
 			throw new Error('Not implemented');
 		}
+		var willLoadWindow = new Deferred();
 		fs.readFile(this.scriptPath, { encoding: 'utf-8' }, (err, lib) => {
 			if (err) {
 				throw err;
@@ -25,9 +27,10 @@ export class TemplatingEngine {
 					ProcessExternalResources: false
 				},
 				done: (errors, window) => {
-					callback(window);
+					willLoadWindow.resolve(window);
 				}
 			});
 		});
+		return willLoadWindow.promise;
 	}
 }

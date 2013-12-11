@@ -1,14 +1,32 @@
 import base = require('../base');
 var swig = new (require('swig')).Swig();
+import Promises = require('../../lib/Promises');
+var Deferred = Promises.Deferred;
 
 
 export class Swig extends base.TemplatingEngine {
 
 	swig = swig;
+	private _render: Function;
 
-	compile(source: string, callback: Function) {
-		callback(context => {
+	compile(source: string): Promises.Promise {
+		this._render = context => {
 			return this.swig.render(source, context);
+		};
+		var willCompile = new Deferred();
+		setTimeout(() => {
+			willCompile.resolve({
+				render: this.onRender.bind(this)
+			});
 		});
+		return willCompile.promise;
+	}
+
+	private onRender(context: {}): Promises.Promise {
+		var willRender = new Deferred();
+		setTimeout(() => {
+			willRender.resolve(this._render(context));
+		});
+		return willRender.promise;
 	}
 }

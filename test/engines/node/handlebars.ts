@@ -5,9 +5,11 @@ import _Handlebars = require('../../../engines/node/handlebars');
 var Handlebars = _Handlebars.Handlebars;
 
 
-it('supports node/handlebars templating engine', done => {
-	new Handlebars().compile('{{foo}}', template => {
-		expect(template({ foo: 'bar' })).to.equal('bar');
-		done();
+it('supports node/handlebars template engine', done => {
+	new Handlebars().compile('{{foo}}').done(template => {
+		template.render({ foo: 'bar' }).done(html => {
+			expect(html).to.equal('bar');
+			done();
+		});
 	});
 });

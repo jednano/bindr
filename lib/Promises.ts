@@ -8,7 +8,7 @@
 			(...args: any[]) => {
 				results[i] = args;
 				remaining--;
-				if (!remaining && done.status() !== 'rejected') {
+				if (!remaining && done.status !== 'rejected') {
 					done.resolve.apply(done, results);
 				}
 			},
@@ -20,7 +20,7 @@
 		done.resolve.apply(done, results);
 	}
 
-	return done.promise();
+	return done.promise;
 }
 
 export class Promise {
@@ -35,9 +35,9 @@ export class Promise {
 		return this.deferred.done(callback);
 	}
 
-	status(): string { return this.deferred.status(); }
+	status(): string { return this.deferred.status; }
 
-	result(): any[] { return this.deferred.result(); }
+	result(): any[] { return this.deferred.result; }
 
 }
 
@@ -54,11 +54,17 @@ export class Deferred {
 		this._status = 'in progress';
 	}
 
-	promise(): Promise { return this._promise; }
+	get promise(): Promise {
+		return this._promise;
+	}
 
-	status(): string { return this._status; }
+	get status(): string {
+		return this._status;
+	}
 
-	result(): any[] { return this._result; }
+	get result(): any[] {
+		return this._result;
+	}
 
 	resolve(...result: any[]): Deferred {
 		this._result = result;
@@ -88,7 +94,7 @@ export class Deferred {
 			this.reject.apply(this, this.result);
 		}
 
-		return d.promise();
+		return d.promise;
 	}
 
 	done(callback: Function): void {

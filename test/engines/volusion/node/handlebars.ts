@@ -6,7 +6,7 @@ import _Handlebars = require('../../../../engines/volusion/node/handlebars');
 var Handlebars = _Handlebars.Handlebars;
 
 
-describe('volusion/node/handlebars templating engine', () => {
+describe('volusion/node/handlebars template engine', () => {
 
 	var hb;
 	before(() => {
@@ -18,8 +18,10 @@ describe('volusion/node/handlebars templating engine', () => {
 		var source = '{{{link_to}}}';
 		var expectedResult = '<a href="#foo">bar</a>';
 
-		hb.compile(source, template => {
-			expect(template(context)).to.equal(expectedResult);
+		hb.compile(source).done(template => {
+			template.render(context).done(html => {
+				expect(html).to.equal(expectedResult);
+			});
 			done();
 		});
 	});
