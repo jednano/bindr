@@ -2,8 +2,7 @@
 ///<reference path='../../../../engines/volusion/node/handlebars.ts'/>
 import chai = require('chai');
 var expect = chai.expect;
-import _Handlebars = require('../../../../engines/volusion/node/handlebars');
-var Handlebars = _Handlebars.Handlebars;
+import Handlebars = require('../../../../engines/volusion/node/handlebars');
 
 
 describe('volusion/node/handlebars template engine', () => {

@@ -2,7 +2,7 @@ import base = require('../../base');
 import _Handlebars = require('../../node/handlebars');
 
 
-export class Handlebars extends _Handlebars.Handlebars {
+class Handlebars extends _Handlebars {
 
 	constructor() {
 		super();
@@ -11,3 +11,5 @@ export class Handlebars extends _Handlebars.Handlebars {
 		});
 	}
 }
+
+export = Handlebars;

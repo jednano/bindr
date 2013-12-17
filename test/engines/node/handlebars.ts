@@ -1,8 +1,7 @@
 ﻿///<reference path='../../common.ts'/>
 import chai = require('chai');
 var expect = chai.expect;
-import _Handlebars = require('../../../engines/node/handlebars');
-var Handlebars = _Handlebars.Handlebars;
+import Handlebars = require('../../../engines/node/handlebars');
 
 
 it('supports node/handlebars template engine', done => {

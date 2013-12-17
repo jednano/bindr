@@ -1,8 +1,7 @@
 ﻿///<reference path='../../common.ts'/>
 import chai = require('chai');
 var expect = chai.expect;
-import _Swig = require('../../../engines/node/swig');
-var Swig = _Swig.Swig;
+import Swig = require('../../../engines/node/swig');
 
 
 it('supports node/swig template engine', done => {

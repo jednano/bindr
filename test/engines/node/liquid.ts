@@ -1,8 +1,7 @@
 ﻿///<reference path='../../common.ts'/>
 import chai = require('chai');
 var expect = chai.expect;
-import _Liquid = require('../../../engines/node/liquid');
-var Liquid = _Liquid.Liquid;
+import Liquid = require('../../../engines/node/liquid');
 
 
 it('supports node/liquid template engine', done => {

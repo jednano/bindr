@@ -2,8 +2,7 @@
 ///<reference path='../../engines/handlebars.ts'/>
 import chai = require('../chai');
 var expect = chai.expect;
-import _Handlebars = require('../../engines/handlebars');
-var Handlebars = _Handlebars.Handlebars;
+import Handlebars = require('../../engines/handlebars');
 import templateBinder = require('../../lib/templateBinder');
 import sinon = require('sinon');
 

@@ -3,7 +3,7 @@ import Promises = require('../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-export class Knockout extends base.TemplatingEngine {
+class Knockout extends base.TemplatingEngine {
 
 	ko: any;
 	private _body: any;
@@ -36,3 +36,5 @@ export class Knockout extends base.TemplatingEngine {
 		return rendering.promise;
 	}
 }
+
+export = Knockout;

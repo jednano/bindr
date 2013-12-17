@@ -4,7 +4,7 @@ import Promises = require('../../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-export class Liquid extends base.TemplatingEngine {
+class Liquid extends base.TemplatingEngine {
 
 	liquid = liquid;
 
@@ -16,3 +16,5 @@ export class Liquid extends base.TemplatingEngine {
 		return compiling.promise;
 	}
 }
+
+export = Liquid;

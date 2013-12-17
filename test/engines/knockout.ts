@@ -2,8 +2,7 @@
 ///<reference path='../../engines/knockout.ts'/>
 import chai = require('chai');
 var expect = chai.expect;
-import _Knockout = require('../../engines/knockout');
-var Knockout = _Knockout.Knockout;
+import Knockout = require('../../engines/knockout');
 
 
 it('supports knockout template engine', done => {

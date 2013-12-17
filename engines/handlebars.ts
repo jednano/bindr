@@ -4,7 +4,7 @@ import Promises = require('../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-export class Handlebars extends base.TemplatingEngine {
+class Handlebars extends base.TemplatingEngine {
 
 	hb: HandlebarsStatic;
 	private _compiling: Promises.Deferred;
@@ -38,3 +38,5 @@ export class Handlebars extends base.TemplatingEngine {
 		return rendering.promise;
 	}
 }
+
+export = Handlebars;

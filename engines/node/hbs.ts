@@ -1,5 +1,7 @@
 import _Handlebars = require('./handlebars');
 
 
-export class Handlebars extends _Handlebars.Handlebars {
+class Handlebars extends _Handlebars {
 }
+
+export = Handlebars;

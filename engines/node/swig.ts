@@ -4,7 +4,7 @@ import Promises = require('../../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-export class Swig extends base.TemplatingEngine {
+class Swig extends base.TemplatingEngine {
 
 	swig = swig;
 	private _render: Function;
@@ -30,3 +30,5 @@ export class Swig extends base.TemplatingEngine {
 		return rendering.promise;
 	}
 }
+
+export = Swig;
