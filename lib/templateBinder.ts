@@ -1,71 +1,51 @@
 ﻿///<reference path='../vendor/dt-node/node.d.ts'/>
 ///<reference path='../vendor/dt-express/express.d.ts'/>
+import express = require('express');
 var extend = require('extend');
+import base = require('../engines/base');
 
 
-export function bindTemplates(request: ExpressServerRequest, response: ExpressServerResponse) {
+export function bindTemplates(request: Request, response: Response) {
 	var templateBinder = new TemplateBinder(response);
 	templateBinder.bindTemplates(request.body);
 	return templateBinder.boundTemplates;
 }
 
-interface BindRequestBody {
+export interface Request {
+	body: string;
+}
+
+export interface Response {
+	send(statusOrBody: any, body?: any): Response;
+	json(statusOrBody: any, body?: any): Response;
+}
+
+interface BindRequest {
 	engine?: string;
 	data?: any;
 	id?: string;
 	source?: string;
-	templates?: BindRequestBody[];
+	templates?: BindRequest[];
 }
 
-interface TemplatingEngine {
-	compile: (source: string) => Promise;
-}
-
-interface Promise {
-	/**
-	* Add handlers to be called when the Deferred object is resolved.
-	*/
-	done: (callback: Function) => Promise;
-	/**
-	* Add handlers to be called when the Deffered object is rejected.
-	*/
-	fail: (callback: Function) => Promise;
-	/**
-	* Add handlers to be called when the Deffered object is either resolved
-	* or rejected.
-	*/
-	always: (callback: Function) => Promise;
-	/**
-	* Add handlers to be called when the Deferred object generates progress
-	* notifications.
-	*/
-	progress: (callback: Function) => Promise;
-	/**
-	* Add handlers to be called when the Deffered object is resolved, rejected
-	* or still in progress.
-	*/
-	then: (done: Function, fail?: Function, progress?: Function) => Promise;
-}
-
-class TemplateBinder implements BindRequestBody {
-	private response: ExpressServerResponse;
-	private engines = {};
-	private isValid: boolean;
-	private hash: BindRequestBody;
+class TemplateBinder implements BindRequest {
+	private _engines = {};
+	private _isValid: boolean;
+	private _bindRequest: BindRequest;
 	engine: string;
 	data: any;
 	id: string;
 	source: string;
 	boundTemplates = {};
 
-	constructor(response: ExpressServerResponse) {
-		this.response = response;
+	// ReSharper disable once InconsistentNaming
+	constructor(private _response: Response) {
 	}
 
-	public bindTemplates(hash: BindRequestBody) {
-		this.hash = hash;
+	public bindTemplates(bindRequest: BindRequest) {
+		this._bindRequest = bindRequest;
 
-		var templates = hash.templates;
+		var templates = bindRequest.templates;
 		if (templates) {
 			saveState.call(this);
 			templates.forEach(this.bindTemplates.bind(this));
@@ -76,21 +56,21 @@ class TemplateBinder implements BindRequestBody {
 		// ReSharper disable MisuseOfOwnerFunctionThis
 		function saveState() {
 			this.savedState = {
-				hash: this.hash,
+				_bindRequest: this._bindRequest,
 				data: this.data,
 				engine: this.engine
 			};
 		}
 
 		function restoreState() {
-			this.hash = hash;
+			this._bindRequest = bindRequest;
 			this.data = this.savedState.data;
 			this.engine = this.savedState.engine;
 		}
 		// ReSharper restore MisuseOfOwnerFunctionThis
 
 		this.validate();
-		if (this.isValid) {
+		if (this._isValid) {
 			this.compile();
 		}
 	}
@@ -102,43 +82,43 @@ class TemplateBinder implements BindRequestBody {
 			this.requireData,
 			this.requireEngine
 		];
-		this.isValid = true;
+		this._isValid = true;
 		for (var i = 0; i < requireMethods.length; i++) {
 			requireMethods[i].call(this);
-			if (!this.isValid) {
+			if (!this._isValid) {
 				break;
 			}
 		}
 	}
 
 	private requireId() {
-		this.id = this.hash.id;
+		this.id = this._bindRequest.id;
 		if (!this.id) {
 			this.invalidate('missing required template id');
 		}
 	}
 
 	private invalidate(message: string) {
-		this.response.send(400, message);
-		this.isValid = false;
+		this._response.send(400, message);
+		this._isValid = false;
 	}
 
 	private requireSource() {
-		this.source = this.hash.source || this.source;
+		this.source = this._bindRequest.source || this.source;
 		if (!this.source) {
 			this.invalidate('missing required template source');
 		}
 	}
 
 	private requireData() {
-		this.data = extend(this.hash.data, this.data || {});
+		this.data = extend(this._bindRequest.data, this.data || {});
 		if (!this.data) {
 			this.invalidate('missing required template data');
 		}
 	}
 
 	private requireEngine() {
-		var name = this.hash.engine;
+		var name = this._bindRequest.engine;
 		if (name) {
 			this.tryLoadingEngine(name);
 		}
@@ -149,14 +129,14 @@ class TemplateBinder implements BindRequestBody {
 
 	private tryLoadingEngine(name: string) {
 		try {
-			this.engines[name] = require('../engines/' + name);
+			this._engines[name] = require('../engines/' + name);
 		} catch (e) {
 			this.invalidate('unsupported templating engine');
 		}
 	}
 
 	private compile() {
-		this.engines[this.engine].compile(this.source)
+		this._engines[this.engine].compile(this.source)
 			.done(this.addTemplate.bind(this));
 	}
 

@@ -43,11 +43,15 @@
     <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Compile Include="engines\base.ts" />
+    <Content Include="engines\hbs.ts" />
     <Content Include="engines\index.ts" />
     <Content Include="engines\handlebars.ts" />
+    <Content Include="engines\ko.ts" />
+    <Content Include="engines\node\hbs.ts" />
     <Content Include="engines\node\liquid.ts" />
     <Content Include="engines\node\swig.ts" />
     <Content Include="CONTRIBUTING.md" />
+    <Content Include="engines\volusion\node\hbs.ts" />
     <Content Include="lib\Promises.ts" />
     <Content Include="test\chai.ts" />
     <Content Include="test\common.ts" />

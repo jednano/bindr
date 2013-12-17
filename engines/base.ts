@@ -1,6 +1,6 @@
 ///<reference path='../vendor/dt-node/node.d.ts'/>
 var jsdom = require('jsdom');
-var fs = require('fs');
+import fs = require('fs');
 import Promises = require('../lib/Promises');
 var Deferred = Promises.Deferred;
 

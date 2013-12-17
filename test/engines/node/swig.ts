@@ -1,6 +1,6 @@
 ﻿///<reference path='../../common.ts'/>
-import _chai = require('../../chai');
-var expect: chai.ExpectStatic = _chai.expect;
+import chai = require('chai');
+var expect = chai.expect;
 import _Swig = require('../../../engines/node/swig');
 var Swig = _Swig.Swig;
 

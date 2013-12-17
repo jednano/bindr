@@ -7,20 +7,20 @@
  * Module dependencies.
  */
 
-var express = require('express');
 var http = require('http');
 var path = require('path');
+import express = require('express');
 import routes = require('./routes/index');
 
 
-var allowCrossDomain = (req: ExpressServerRequest, res: ExpressServerResponse, next) => {
+var allowCrossDomain = (req: express.Request, res: express.Response, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'POST');
 	res.header('Access-Control-Allow-Headers', 'Content-Type');
 	next();
 };
 
-var app: ExpressApplication = express();
+var app: express.Application = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);

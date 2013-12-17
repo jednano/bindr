@@ -1,6 +1,6 @@
 ///<reference path='../../vendor/dt-handlebars/handlebars.d.ts'/>
 import base = require('../base');
-var hb: HandlebarsStatic = require('handlebars');
+import hb = require('handlebars');
 import Promises = require('../../lib/Promises');
 var Deferred = Promises.Deferred;
 

@@ -1,7 +1,7 @@
 ﻿///<reference path='../common.ts'/>
 ///<reference path='../../engines/knockout.ts'/>
-import _chai = require('../chai');
-var expect: chai.ExpectStatic = _chai.expect;
+import chai = require('chai');
+var expect = chai.expect;
 import _Knockout = require('../../engines/knockout');
 var Knockout = _Knockout.Knockout;
 
