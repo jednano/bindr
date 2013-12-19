@@ -27,33 +27,37 @@ interface BindRequest {
 	id?: string;
 	source?: string;
 	templates?: BindRequest[];
-	binding?: Promises.Deferred;
 }
 
 class TemplateBinder implements BindRequest {
 	private engines: { [key: string]: typeof base.TemplatingEngine } = {};
 	private boundTemplates: { [key: string]: string } = {};
+	private valid: boolean;
+	private binding: Promises.Deferred;
 
 	constructor(private response: Response) {
 	}
 
 	public bindTemplates(context: BindRequest): Promises.Promise {
 
-		var binding = new Deferred();
-		var binders = [];
+		var binding = this.binding = new Deferred();
+		if (!this.validate(context)) {
+			return binding.promise;
+		}
 
+		var binders = [];
 		if (context.engine && context.source && context.data) {
-			var d = new Deferred();
-			binders.push(d.promise);
+			var rendering = new Deferred();
+			binders.push(rendering.promise);
 			// ReSharper disable once InconsistentNaming
 			this.tryLoadingEngine(context).then((Engine: typeof base.TemplatingEngine) => {
 				new Engine().compile(context.source).done(template => {
-					template.render(context.data || {}).done(html => {
+					template.render(context.data).done(html => {
 						this.boundTemplates[context.id] = html;
-						d.resolve();
+						rendering.resolve();
 					});
 				});
-			}, d.reject.bind(context.binding));
+			}, rendering.reject);
 		}
 
 		if (context.templates) {
@@ -68,12 +72,61 @@ class TemplateBinder implements BindRequest {
 		Promises.when.apply(this, binders).done(() => {
 			binding.resolve(this.boundTemplates);
 		});
-
 		return binding.promise;
 	}
 
-	private onBindComplete(id: string, html: string): void {
-		this.boundTemplates[id] = html;
+	private validate(context: BindRequest): boolean {
+		var requireMethods = [
+			this.requireId,
+			this.requireSource,
+			this.requireData,
+			this.requireEngine
+		];
+		var valid = true;
+		for (var i = 0; i < requireMethods.length; i++) {
+			valid = requireMethods[i](context);
+			if (!valid) {
+				break;
+			}
+		}
+		return valid;
+	}
+
+	private requireId(context: BindRequest): boolean {
+		if (!context.id) {
+			this.invalidate('missing required template id');
+			return false;
+		}
+		return true;
+	}
+
+	private invalidate(message: string) {
+		this.binding.reject(message);
+		this.response.send(400, message);
+	}
+
+	private requireSource(context: BindRequest): boolean {
+		if (!context.source) {
+			this.invalidate('missing required template source');
+			return false;
+		}
+		return true;
+	}
+
+	private requireData(context: BindRequest): boolean {
+		if (!context.data) {
+			this.invalidate('missing required template data');
+			return false;
+		}
+		return true;
+	}
+
+	private requireEngine(context: BindRequest): boolean {
+		if (!context.engine) {
+			this.invalidate('unspecified templating engine');
+			return false;
+		}
+		return true;
 	}
 
 	private tryLoadingEngine(context: BindRequest): Promises.Promise {
@@ -89,55 +142,4 @@ class TemplateBinder implements BindRequest {
 		});
 		return loading.promise;
 	}
-
-	//private validate(): boolean {
-	//	var requireMethods = [
-	//		this.requireId,
-	//		this.requireSource,
-	//		this.requireData,
-	//		this.requireEngine
-	//	];
-	//	var valid = true;
-	//	for (var i = 0; i < requireMethods.length; i++) {
-	//		valid = requireMethods[i].call(this, valid);
-	//		if (!valid) {
-	//			break;
-	//		}
-	//	}
-	//	return valid;
-	//}
-
-	//private requireId(id: string) {
-	//	if (!id) {
-	//		this.invalidate('missing required template id');
-	//	}
-	//}
-
-	private invalidate(message: string) {
-		this.response.send(400, message);
-	}
-
-	//private requireSource() {
-	//	this.source = this._bindRequest.source || this.source;
-	//	if (!this.source) {
-	//		this.invalidate('missing required template source');
-	//	}
-	//}
-
-	//private requireData() {
-	//	this.data = extend(this._bindRequest.data, this.data || {});
-	//	if (!this.data) {
-	//		this.invalidate('missing required template data');
-	//	}
-	//}
-
-	//private requireEngine() {
-	//	var name = this._bindRequest.engine;
-	//	if (name) {
-	//		this.tryLoadingEngine(name);
-	//	}
-	//	if (!this.engine) {
-	//		this.invalidate('unspecified templating engine');
-	//	}
-	//}
 }
