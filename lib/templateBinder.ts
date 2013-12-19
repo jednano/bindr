@@ -32,7 +32,6 @@ interface BindRequest {
 class TemplateBinder implements BindRequest {
 	private engines: { [key: string]: typeof base.TemplatingEngine } = {};
 	private boundTemplates: { [key: string]: string } = {};
-	private valid: boolean;
 	private binding: Promises.Deferred;
 
 	constructor(private response: Response) {
@@ -45,12 +44,21 @@ class TemplateBinder implements BindRequest {
 			return binding.promise;
 		}
 
-		var binders = [];
-		if (context.engine && context.source && context.data) {
+		var binders: Promises.Promise[];
+		renderContext.call(this);
+		walkTemplates.call(this);
+		resolveBinding.call(this);
+		return binding.promise;
+
+		function renderContext() {
+			binders = [];
+			if (!context.engine || !context.source || !context.data) {
+				return;
+			}
 			var rendering = new Deferred();
 			binders.push(rendering.promise);
 			// ReSharper disable once InconsistentNaming
-			this.tryLoadingEngine(context).then((Engine: typeof base.TemplatingEngine) => {
+			this.tryLoadingEngine(context).then(Engine => {
 				new Engine().compile(context.source).done(template => {
 					template.render(context.data).done(html => {
 						this.boundTemplates[context.id] = html;
@@ -60,7 +68,10 @@ class TemplateBinder implements BindRequest {
 			}, rendering.reject);
 		}
 
-		if (context.templates) {
+		function walkTemplates() {
+			if (!context.templates) {
+				return;
+			}
 			context.templates.forEach(template => {
 				binders.push(this.bindTemplates(extend({
 					engine: context.engine,
@@ -69,10 +80,11 @@ class TemplateBinder implements BindRequest {
 			});
 		}
 
-		Promises.when.apply(this, binders).done(() => {
-			binding.resolve(this.boundTemplates);
-		});
-		return binding.promise;
+		function resolveBinding() {
+			Promises.when.apply(this, binders).done(() => {
+				binding.resolve(this.boundTemplates);
+			});
+		}
 	}
 
 	private validate(context: BindRequest): boolean {
