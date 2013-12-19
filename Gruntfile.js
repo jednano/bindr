@@ -26,7 +26,7 @@
 		},
 		watch: {
 			ts: {
-				files: '**/*.ts',
+				files: tsFiles,
 				tasks: ['test']
 			}
 		}
