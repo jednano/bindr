@@ -33,4 +33,8 @@ export class TemplatingEngine {
 		});
 		return willLoadWindow.promise;
 	}
+
+	compile(source: string): Promises.Promise {
+		throw new Error('Not implemented');
+	}
 }

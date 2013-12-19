@@ -45,5 +45,5 @@
 
 var tsFiles = [
 	'app.ts',
-	'{routes,lib,test}/**/*.ts'
+	'{routes,lib,engines,test}/**/*.ts'
 ];

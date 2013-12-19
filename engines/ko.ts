@@ -1,5 +1,7 @@
 import _Knockout = require('./knockout');
 
 
-export class Knockout extends _Knockout.Knockout {
+class Knockout extends _Knockout {
 }
+
+export = Knockout;

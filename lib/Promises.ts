@@ -25,7 +25,12 @@
 
 export class Promise {
 
-	constructor(private deferred: Deferred) {}
+	constructor(private deferred: Deferred) {
+	}
+
+	fail(error: Function): Promise {
+		return this.deferred.fail(error);
+	}
 
 	then(callback: Function, error: Function): Promise {
 		return this.deferred.then(callback, error);
@@ -35,9 +40,13 @@ export class Promise {
 		return this.deferred.done(callback);
 	}
 
-	status(): string { return this.deferred.status; }
+	get status(): string {
+		return this.deferred.status;
+	}
 
-	result(): any[] { return this.deferred.result; }
+	get result(): any[] {
+		return this.deferred.result;
+	}
 
 }
 
@@ -84,16 +93,24 @@ export class Deferred {
 
 	then(callback: Function, error: Function): Promise {
 		var d = new Deferred();
-
 		this.resolved.push(this.wrap(d, callback, 'resolve'));
 		this.rejected.push(this.wrap(d, error, 'reject'));
+		this.checkStatus();
+		return d.promise;
+	}
 
-		if (this._status === 'resolved') {
-			this.resolve.apply(this, this.result);
-		} else if (this._status === 'rejected') {
-			this.reject.apply(this, this.result);
-		}
+	fail(error: Function): Promise {
+		var d = new Deferred();
+		this.rejected.push(this.wrap(d, error, 'reject'));
+		this.checkStatus();
+		return d.promise;
+	}
 
+	always(callback: Function): Promise {
+		var d = new Deferred();
+		this.resolved.push(this.wrap(d, callback, 'resolve'));
+		this.rejected.push(this.wrap(d, callback, 'reject'));
+		this.checkStatus();
 		return d.promise;
 	}
 
@@ -103,6 +120,14 @@ export class Deferred {
 				throw err;
 			}
 		});
+	}
+
+	private checkStatus() {
+		if (this._status === 'resolved') {
+			this.resolve.apply(this, this.result);
+		} else if (this._status === 'rejected') {
+			this.reject.apply(this, this.result);
+		}
 	}
 
 	private wrap(d: Deferred, f: Function, method: string): Function {

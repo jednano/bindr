@@ -17,6 +17,7 @@ export function index(request: express.Request, response: express.Response) {
  * POST templates with data for binding.
  */
 export function bind(request: express.Request, response: express.Response) {
-	var boundTemplates = templateBinder.bindTemplates(request, response);
-	response.json(boundTemplates);
+	templateBinder.bindTemplates(request, response).done(json => {
+		response.json(json);
+	});
 }
