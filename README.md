@@ -113,10 +113,10 @@ First, you'll need a [Node.js][] server.
 
 ### Installation
 
-| Bash                        | Windows Command Prompt         |
-| ----------------------------| ------------------------------ |
-| $ npm install express-bindr | C:\> npm install express-bindr |
-| $ ./install                 | C:\> sh install                |
+| Bash                        | Windows Command Prompt          |
+| ----------------------------| ------------------------------- |
+| $ npm install express-bindr | C:\\> npm install express-bindr |
+| $ ./install                 | C:\\> sh install                |
 
 
 ### Usage
