@@ -119,12 +119,17 @@ First, you'll need a [Node.js][] server.
 | $ ./install                 | C:\\> sh install                |
 
 
-### Usage
+### Library Usage
 
 ```node
 var bindr = require('express-bindr');
+// coming soon...
+```
 
 
+### Front-end Usage
+
+```js
 $.post('http://www.example.com/bindr', {
     engine: 'node/hbs',
     data: {
