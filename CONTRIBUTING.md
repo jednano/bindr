@@ -127,27 +127,3 @@ More documentation coming soon...
 [Sublime Text]: http://www.sublimetext.com/
 [Sublime Package Control]: https://sublime.wbond.net/installation
 [DefinitelyTyped]: https://github.com/borisyankov/DefinitelyTyped
-
-
-
-1. Is this engine only available as a JavaScript library? Then you'll want to
-add it to root of the [engines folder][].
-1. Is the engine available as a Node package? Add it to the [engines/node][]
-namespace.
-1. Is this engine an extension of an already existing engine? Then create your
-own namespace inside the [engines folder][], following the example of
-[companyx][]. In this example, helper methods were added to the Handlebars
-engine.
-
-Now that you've decided where to put the engine, here's some example source
-code of how to get started. Let's say your engine is called Foo:
-
-```node
-
-```
-
-
-
-[engines folder]: engines
-[engines/node namespace]: engines/node
-[companyx]: engines/companyx
