@@ -86,7 +86,7 @@ describe('Template Binder', () => {
 				templates: [
 					{
 						id: 'two',
-						engine: 'knockout',
+						engine: 'ko',
 						source: '<p data-bind="text:bar"></p>'
 					},
 					{
