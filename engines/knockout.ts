@@ -1,9 +1,9 @@
-import base = require('./base');
+import Engine = require('../lib/Engine');
 import Promises = require('../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-class Knockout extends base.TemplatingEngine {
+class Knockout extends Engine {
 
 	ko: any;
 	private _body: any;

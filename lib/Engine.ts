@@ -1,11 +1,11 @@
 ///<reference path='../vendor/dt-node/node.d.ts'/>
 var jsdom = require('jsdom');
 import fs = require('fs');
-import Promises = require('../lib/Promises');
+import Promises = require('./Promises');
 var Deferred = Promises.Deferred;
 
 
-export class TemplatingEngine {
+class Engine {
 
 	constructor(private scriptPath?: string) {
 	}
@@ -38,3 +38,5 @@ export class TemplatingEngine {
 		throw new Error('Not implemented');
 	}
 }
+
+export = Engine;

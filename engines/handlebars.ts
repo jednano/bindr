@@ -1,10 +1,10 @@
 ///<reference path='../vendor/dt-handlebars/handlebars.d.ts'/>
-import base = require('./base');
+import Engine = require('../lib/Engine');
 import Promises = require('../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-class Handlebars extends base.TemplatingEngine {
+class Handlebars extends Engine {
 
 	hb: HandlebarsStatic;
 	private _compiling: Promises.Deferred;

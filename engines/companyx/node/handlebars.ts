@@ -1,4 +1,3 @@
-import base = require('../../base');
 import _Handlebars = require('../../node/handlebars');
 
 

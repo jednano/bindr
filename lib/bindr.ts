@@ -2,7 +2,7 @@
 ///<reference path='../vendor/dt-express/express.d.ts'/>
 import express = require('express');
 var extend = require('extend');
-import base = require('../engines/base');
+import Engine = require('./Engine');
 import Promises = require('./Promises');
 var Deferred = Promises.Deferred;
 
@@ -30,7 +30,7 @@ interface BindRequest {
 }
 
 class Bindr implements BindRequest {
-	private engines: { [key: string]: typeof base.TemplatingEngine } = {};
+	private engines: { [key: string]: typeof Engine } = {};
 	private boundTemplates: { [key: string]: string } = {};
 	private binding: Promises.Deferred;
 

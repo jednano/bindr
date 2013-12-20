@@ -1,10 +1,10 @@
-import base = require('../base');
+import Engine = require('../../lib/Engine');
 var liquid = require('liquid-node');
 import Promises = require('../../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-class Liquid extends base.TemplatingEngine {
+class Liquid extends Engine {
 
 	liquid = liquid;
 

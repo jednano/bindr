@@ -1,10 +1,10 @@
-import base = require('../base');
+import Engine = require('../../lib/Engine');
 var swig = new (require('swig')).Swig();
 import Promises = require('../../lib/Promises');
 var Deferred = Promises.Deferred;
 
 
-class Swig extends base.TemplatingEngine {
+class Swig extends Engine {
 
 	swig = swig;
 	private _render: Function;
