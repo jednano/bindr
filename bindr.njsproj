@@ -31,9 +31,7 @@
   <ItemGroup>
     <Compile Include="engines\knockout.ts" />
     <Compile Include="engines\node\handlebars.ts" />
-    <Compile Include="engines\volusion\node\handlebars.ts" />
     <Compile Include="Gruntfile.js" />
-    <Compile Include="lib\templateBinder.ts" />
     <Compile Include="routes\index.ts" />
     <Content Include=".bowerrc" />
     <Content Include=".editorconfig" />
@@ -44,6 +42,8 @@
     <Content Include="bower.json" />
     <Compile Include="engines\base.ts" />
     <Compile Include="engines\hbs.ts" />
+    <Content Include="engines\companyx\node\handlebars.ts" />
+    <Content Include="engines\companyx\node\hbs.ts" />
     <Content Include="engines\index.ts" />
     <Content Include="engines\handlebars.ts" />
     <Content Include="engines\ko.ts" />
@@ -51,30 +51,31 @@
     <Content Include="engines\node\liquid.ts" />
     <Content Include="engines\node\swig.ts" />
     <Content Include="CONTRIBUTING.md" />
-    <Content Include="engines\volusion\node\hbs.ts" />
+    <Content Include="lib\bindr.ts" />
     <Content Include="lib\Promises.ts" />
+    <Content Include="lib\api.ts" />
     <Content Include="test\chai.ts" />
     <Content Include="test\common.ts" />
+    <Content Include="test\engines\companyx\node\handlebars.ts" />
     <Content Include="test\engines\node\liquid.ts" />
     <Content Include="test\engines\node\swig.ts" />
     <Content Include="test\engines\node\handlebars.ts" />
     <Content Include="test\engines\handlebars.ts" />
     <Content Include="test\engines\knockout.ts" />
-    <Content Include="test\engines\volusion\node\handlebars.ts" />
+    <Content Include="test\lib\bindr.ts" />
     <Content Include="watch" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
-    <Compile Include="test\lib\templateBinder.ts" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="engines\" />
+    <Folder Include="engines\companyx\" />
+    <Folder Include="engines\companyx\node\" />
     <Folder Include="engines\node\" />
-    <Folder Include="engines\volusion\" />
-    <Folder Include="engines\volusion\node\" />
     <Folder Include="lib\" />
     <Folder Include="test\" />
     <Folder Include="public\" />
@@ -83,9 +84,9 @@
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
     <Folder Include="test\engines\" />
+    <Folder Include="test\engines\companyx\" />
+    <Folder Include="test\engines\companyx\node\" />
     <Folder Include="test\engines\node\" />
-    <Folder Include="test\engines\volusion\" />
-    <Folder Include="test\engines\volusion\node\" />
     <Folder Include="test\lib\" />
     <Folder Include="views\" />
   </ItemGroup>

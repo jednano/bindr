@@ -1,7 +1,6 @@
 ///<reference path='../vendor/dt-node/node.d.ts'/>
 ///<reference path='../vendor/dt-express/express.d.ts'/>
-///<reference path='../lib/templateBinder.ts'/>
-import templateBinder = require('../lib/templateBinder');
+import api = require('../lib/api');
 import express = require('express');
 
 
@@ -17,7 +16,7 @@ export function index(request: express.Request, response: express.Response) {
  * POST templates with data for binding.
  */
 export function bind(request: express.Request, response: express.Response) {
-	templateBinder.bindTemplates(request, response).done(json => {
+	api.bind(request, response).done(json => {
 		response.json(json);
 	});
 }

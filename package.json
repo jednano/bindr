@@ -7,6 +7,7 @@
     "name": "Jed Hunsaker",
     "email": "jed.hunsaker@gmail.com"
   },
+  "main": "./lib/api.js",
   "scripts": {
     "start": "node app.js",
     "test": "grunt test"

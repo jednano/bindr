@@ -7,9 +7,9 @@ import Promises = require('./Promises');
 var Deferred = Promises.Deferred;
 
 
-export function bindTemplates(request: Request, response: Response): Promises.Promise {
-	var templateBinder = new TemplateBinder(response);
-	return templateBinder.bindTemplates(request.body);
+export function bind(request: Request, response: Response): Promises.Promise {
+	var bindr = new Bindr(response);
+	return bindr.bind(request.body);
 }
 
 export interface Request {
@@ -29,7 +29,7 @@ interface BindRequest {
 	templates?: BindRequest[];
 }
 
-class TemplateBinder implements BindRequest {
+class Bindr implements BindRequest {
 	private engines: { [key: string]: typeof base.TemplatingEngine } = {};
 	private boundTemplates: { [key: string]: string } = {};
 	private binding: Promises.Deferred;
@@ -37,7 +37,7 @@ class TemplateBinder implements BindRequest {
 	constructor(private response: Response) {
 	}
 
-	public bindTemplates(context: BindRequest): Promises.Promise {
+	public bind(context: BindRequest): Promises.Promise {
 
 		var binding = this.binding = new Deferred();
 		if (!this.validate(context)) {
@@ -73,7 +73,7 @@ class TemplateBinder implements BindRequest {
 				return;
 			}
 			context.templates.forEach(template => {
-				binders.push(this.bindTemplates(extend({
+				binders.push(this.bind(extend({
 					engine: context.engine,
 					data: context.data
 				}, template)));

@@ -123,7 +123,19 @@ First, you'll need a [Node.js][] server.
 
 ```node
 var bindr = require('express-bindr');
-// coming soon...
+bindr.bind({
+    body: {
+        engine: 'hbs',
+        id: 'one',
+        source: '{{foo}}',
+        data: {
+            foo: 'bar'
+        }
+    }
+}, response).done(result => {
+    expect(result.one).to.equal('bar');
+    done();
+});
 ```
 
 
