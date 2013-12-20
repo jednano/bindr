@@ -32,6 +32,8 @@ This installs the js files in the [vendor directory][] and adds it to the
 
 ### Install Definition File
 
+Note: This is *not* required, but it *is* a nice-to-have.
+
 Browse the [DefinitelyTyped] repo for an existing TypeScript definition file
 for your template engine library. If it exists, there's a chance it will also
 exist in [Bower's registry][]. TypeScript definition files are listed in
