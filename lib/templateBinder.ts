@@ -52,7 +52,7 @@ class TemplateBinder implements BindRequest {
 
 		function renderContext() {
 			binders = [];
-			if (!context.engine || !context.source || !context.data) {
+			if (!context.engine || !context.source) {
 				return;
 			}
 			var rendering = new Deferred();
@@ -60,12 +60,12 @@ class TemplateBinder implements BindRequest {
 			// ReSharper disable once InconsistentNaming
 			this.tryLoadingEngine(context).then(Engine => {
 				new Engine().compile(context.source).done(template => {
-					template.render(context.data || {}).done(html => {
+					template.render(context.data).done(html => {
 						this.boundTemplates[context.id] = html;
 						rendering.resolve();
 					});
 				});
-			}, rendering.reject);
+			}, this.invalidate.bind(this));
 		}
 
 		function walkTemplates() {
@@ -112,8 +112,8 @@ class TemplateBinder implements BindRequest {
 	}
 
 	private invalidate(message: string) {
-		this.binding.reject(message);
 		this.response.send(400, message);
+		this.binding.reject(message);
 	}
 
 	private requireSource(context: BindRequest): boolean {

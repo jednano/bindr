@@ -146,9 +146,7 @@ describe('Template Binder', () => {
 				}
 			}
 		}, response).fail(message => {
-			var expectedMessage = 'missing required template id';
-			expect(message).to.equal(expectedMessage);
-			expect(send).to.have.been.calledWithExactly(400, expectedMessage);
+			expect400(message, 'missing required template id');
 			done();
 		});
 	});
@@ -163,9 +161,7 @@ describe('Template Binder', () => {
 				}
 			}
 		}, response).fail(message => {
-			var expectedMessage = 'missing required template source';
-			expect(message).to.equal(expectedMessage);
-			expect(send).to.have.been.calledWithExactly(400, expectedMessage);
+			expect400(message, 'missing required template source');
 			done();
 		});
 	});
@@ -180,31 +176,27 @@ describe('Template Binder', () => {
 				}
 			}
 		}, response).fail(message => {
-			var expectedMessage = 'unspecified template engine';
-			expect(message).to.equal(expectedMessage);
-			expect(send).to.have.been.calledWithExactly(400, expectedMessage);
+			expect400(message, 'unspecified template engine');
 			done();
 		});
 	});
 
-	it('fails if engine provided is unsupported');
-
-	//it('fails if engine provided is unsupported', done => {
-	//	templateBinder.bindTemplates({
-	//		body: {
-	//			id: 'one',
-	//			engine: 'never-create-an-engine-with-this-ridiculous-name',
-	//			source: '{{foo}}',
-	//			data: {
-	//				foo: 'bar'
-	//			}
-	//		}
-	//	}, response).fail(message => {
-	//		var expectedMessage = 'unsupported template engine';
-	//		expect(message).to.equal(expectedMessage);
-	//		expect(send).to.have.been.calledWithExactly(400, expectedMessage);
-	//		done();
-	//	});
-	//});
+	it('fails if engine provided is unsupported', done => {
+		templateBinder.bindTemplates({
+			body: {
+				id: 'one',
+				engine: 'never-create-an-engine-with-this-ridiculous-name',
+				source: 'foo'
+			}
+		}, response).fail(message => {
+			expect400(message, 'unsupported template engine');
+			done();
+		});
+	});
 
 });
+
+function expect400(message, expectedMessage) {
+	expect(message).to.equal(expectedMessage);
+	expect(send).to.have.been.calledWithExactly(400, expectedMessage);
+}
