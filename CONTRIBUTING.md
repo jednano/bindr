@@ -102,10 +102,7 @@ import Foo = require('../../engines/foo');
 
 it('supports foo template engine', done => {
     new Foo().compile('{{foo}}').done(template => {
-        template.render({ foo: 'bar' }).done(html => {
-            expect(html).to.equal('bar');
-            done();
-        });
+        done();
     });
 });
 ```
@@ -134,7 +131,8 @@ compile(source: string): Promises.Promise {
 }
 ```
 
-Save the file and you should see that your tests still fail. This is because...
+Save the file and you should see that your tests passes, but your engine still
+doesn't render the HTML that you want. This is because...
 
 TODO: Add documentation here
 
