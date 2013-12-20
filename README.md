@@ -86,7 +86,7 @@ interchangeably. The choice is yours.
 
 Some template engine syntaxes like [Knockout][] and [AngularJS][] are valid
 HTML out of the box. This allows the UI to render even before the application is
-bootstrapped. Other engines, however, like the popular [Handlebars.js][], are
+bootstrapped. Other engines, however, like the popular [Handlebars][], are
 not valid HTML. This is no knock on Handlebars. It's actually my preferred
 template engine at the moment. Handlebars, however, needs to wait until the
 template binding is complete before the UI can render its contents. If you're
@@ -103,7 +103,7 @@ service would be skipped entirely until the cache is invalidated. In theory,
 this sounds great, but the application still needs to be bootstrapped. In a way,
 the application needs to be hijacked without tearing down or re-rendering its
 contents. This is a problem that has yet to be solved, but it can't be solved
-until bindr is implemented.
+until bindr is implemented as a first step.
 
 
 ## How do I use bindr?
@@ -113,14 +113,15 @@ First, you'll need a [Node.js][] server.
 
 ### Installation
 
-```bash
-$ npm install express-bindr
-$ sh install
-```
+| Bash                        | Windows Command Prompt         |
+| ----------------------------| ------------------------------ |
+| $ npm install express-bindr | C:\> npm install express-bindr |
+| $ ./install                 | C:\> sh install                |
+
 
 ### Usage
 
-```js
+```node
 var bindr = require('express-bindr');
 
 
@@ -136,10 +137,74 @@ $.post('http://www.example.com/bindr', {
             source: '<p>Hello, {{first}} {{last}}!</p>'
         }
     ]
-}, function(html) {
-    $('body').html(html); // <p>Hello, William Shakespeare!</p>
+}, function(templates) {
+    $('body').html(templates.one); // <p>Hello, William Shakespeare!</p>
 });
 ```
+
+
+### engine
+
+The engine must be a supported engine in the [engines folder][] of this project.
+Notice that some of these engines are just aliases to other engines. For
+example, ko points to knockout.
+
+Engines in the root of this folder run on top of [jsdom][], which means the
+actual JavaScript library is being loaded into a fake browser of sorts. In this
+way, you can expect 100% consistency between template binding on the back vs.
+the front end. Understand, however, that these engines perform slightly slower
+than Node-native implementations.
+
+The Node-native libraries are namespaced in the [engines/node folder][].
+
+Other namespaces are reserved for perhaps company-specific helpers built on top
+of the core libraries. Feel free to fork this project and add your own.
+
+Supported template engines are listed as follows:
+
+| Engine Key       | Template Engine               |
+| ---------------- | ----------------------------- |
+| handlebars       | [Handlebars][]                |
+| hbs              | [Handlebars][] alias          |
+| knockout         | [Knockout][]                  |
+| ko               | [Knockout][] alias            |
+| node/handlebars  | [Node Handlebars][]           |
+| node/hbs         | [Node Handlebars][] alias     |
+| node/liquid      | [liquid-node][]               |
+| node/swig        | [Node Swig][]                 |
+
+
+### id
+
+The id is the key you wish to associate with the resulting, bound HTML. Every
+bound template must have a separate id for hash table lookup. The service
+response will be in the following JSON format:
+
+```json
+{
+    "one": "<p>Hello, William Shakespeare!</p>",
+    "two": "<p>Hello, Agatha Christie!</p>",
+    "three": "<p>Hello, Barbara Cartland!</p>"
+}
+```
+
+
+### source
+
+The source is the template engine syntax.
+
+
+### data
+
+The data you wish to be bound to the template.
+
+
+### templates
+
+You may provide more sub-templates that inherit the engine, source and data.
+You may have templates and more templates within templates, as deep as you
+want. This allows you to specify data once and reuse that data for multiple
+sources. If you provide more data, it will simply extend the parent data.
 
 
 ## Contributing
@@ -160,6 +225,12 @@ MIT
 [Express]: http://expressjs.com/
 [Knockout]: http://knockoutjs.com/
 [AngularJS]: http://angularjs.org/
-[Handlebars.js]: http://handlebarsjs.com/
+[Handlebars]: http://handlebarsjs.com/
 [Single-page application]: http://en.wikipedia.org/wiki/Single-page_application
-[Contributing doc]: Contributing.md
+[engines folder]: engines
+[engines/node folder]: engines/node
+[jsdom]: https://github.com/tmpvar/jsdom
+[Node Handlebars]: https://npmjs.org/package/handlebars
+[liquid-node]: https://npmjs.org/package/liquid-node
+[Node Swig]: https://npmjs.org/package/swig
+[Contributing doc]: CONTRIBUTING.md
