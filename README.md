@@ -127,7 +127,7 @@ var bindr = require('express-bindr');
 ```
 
 
-### Front-end Usage
+### Front-end Usage (jQuery Example)
 
 ```js
 $.post('http://www.example.com/bindr', {
