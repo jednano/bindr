@@ -9,11 +9,11 @@ var Deferred = Promises.Deferred;
 
 export function bindTemplates(request: Request, response: Response): Promises.Promise {
 	var templateBinder = new TemplateBinder(response);
-	return templateBinder.bindTemplates(JSON.parse(request.body));
+	return templateBinder.bindTemplates(request.body);
 }
 
 export interface Request {
-	body: string;
+	body: any;
 }
 
 export interface Response {
@@ -60,7 +60,7 @@ class TemplateBinder implements BindRequest {
 			// ReSharper disable once InconsistentNaming
 			this.tryLoadingEngine(context).then(Engine => {
 				new Engine().compile(context.source).done(template => {
-					template.render(context.data).done(html => {
+					template.render(context.data || {}).done(html => {
 						this.boundTemplates[context.id] = html;
 						rendering.resolve();
 					});
@@ -91,12 +91,11 @@ class TemplateBinder implements BindRequest {
 		var requireMethods = [
 			this.requireId,
 			this.requireSource,
-			this.requireData,
 			this.requireEngine
 		];
 		var valid = true;
 		for (var i = 0; i < requireMethods.length; i++) {
-			valid = requireMethods[i](context);
+			valid = requireMethods[i].call(this, context);
 			if (!valid) {
 				break;
 			}
@@ -125,17 +124,9 @@ class TemplateBinder implements BindRequest {
 		return true;
 	}
 
-	private requireData(context: BindRequest): boolean {
-		if (!context.data) {
-			this.invalidate('missing required template data');
-			return false;
-		}
-		return true;
-	}
-
 	private requireEngine(context: BindRequest): boolean {
 		if (!context.engine) {
-			this.invalidate('unspecified templating engine');
+			this.invalidate('unspecified template engine');
 			return false;
 		}
 		return true;
