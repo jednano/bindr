@@ -87,20 +87,41 @@ class Foo extends Engine {
 export = Foo;
 ```
 
-Let's add a constructor inside the class:
+
+### Write a failing test
+
+Now that your class is setup, you'll want to write a failing test. You can add
+a ts file at `test/engines/foo.ts` and set it up like this:
 
 ```ts
-constructor(scriptPath?: string) {
-    super(scriptPath || './vendor/foo/foo.js');
-}
+///<reference path='../common.ts'/>
+import chai = require('chai');
+var expect = chai.expect;
+import Foo = require('../../engines/foo');
+
+
+it('supports foo template engine', done => {
+    new Foo().compile('{{foo}}').done(template => {
+        template.render({ foo: 'bar' }).done(html => {
+            expect(html).to.equal('bar');
+            done();
+        });
+    });
+});
 ```
 
-This opens up your class for extension by allowing a sub-class to override
-your script path. Your pull request will not be merged in without this
-inclusion.
+Save the file and run your tests. You can do this with `npm test` or you can
+start a watch with `./watch` or `sh watch`, depending on your shell. This
+will keep track of any .ts file changes, clean, rebuild and rerun the tests.
 
-Next, you'll want to override the base engine's compile method. If you don't
-do this, a `Not Implemented` error will be thrown.
+This test will fail and rightly so. You haven't overridden your base class'
+compile method. If you don't do this, a `Not Implemented` error will be
+thrown.
+
+
+### Override base class methods
+
+Here's how you would override your base class' compile method:
 
 ```ts
 private source: string;
@@ -113,7 +134,23 @@ compile(source: string): Promises.Promise {
 }
 ```
 
-More documentation coming soon...
+Save the file and you should see that your tests still fail. This is because...
+
+TODO: Add documentation here
+
+Let's add a constructor inside the class:
+
+```ts
+constructor(scriptPath?: string) {
+    super(scriptPath || './vendor/foo/foo.js');
+}
+```
+
+This opens up your class for extension by allowing a sub-class to override
+your script path. Your pull request will not be merged in without this
+inclusion.
+
+TODO: Add documentation here
 
 
 
