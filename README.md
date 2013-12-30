@@ -6,6 +6,9 @@ When used in tandem with a server-side technology such as [ASP.NET][], [PHP][],
 binding on both the back and the front end.
 
 [![Build Status][]](http://travis-ci.org/jedmao/bindr)
+[![Dependency Status][]](https://gemnasium.com/jedmao/bindr)
+[![NPM version][]](http://badge.fury.io/js/bindr)
+[![Views][]](https://sourcegraph.com/github.com/jedmao/bindr)
 
 
 ## What is template binding?
