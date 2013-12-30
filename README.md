@@ -238,6 +238,9 @@ MIT
 
 
 [Build Status]: https://secure.travis-ci.org/jedmao/bindr.png?branch=master
+[Dependency Status]: https://gemnasium.com/jedmao/bindr.png
+[NPM Version]: https://badge.fury.io/js/bindr.png
+[Views]: https://sourcegraph.com/api/repos/github.com/jedmao/bindr/counters/views-24h.png
 [Node.js]: http://nodejs.org/
 [ASP.NET]: http://www.asp.net/
 [PHP]: http://www.php.net/
