@@ -7,25 +7,24 @@ var Deferred = Promises.Deferred;
 class Swig extends Engine {
 
 	swig = swig;
-	private _render: Function;
 
 	compile(source: string): Promises.Promise {
-		this._render = context => {
-			return this.swig.render(source, context);
-		};
 		var compiling = new Deferred();
 		setTimeout(() => {
+			var render = context => {
+				return this.swig.render(source, context);
+			};
 			compiling.resolve({
-				render: this.onRender.bind(this)
+				render: this.onRender.bind(this, render)
 			});
 		});
 		return compiling.promise;
 	}
 
-	private onRender(context: {}): Promises.Promise {
+	private onRender(render: Function, context: {}): Promises.Promise {
 		var rendering = new Deferred();
 		setTimeout(() => {
-			rendering.resolve(this._render(context));
+			rendering.resolve(render(context));
 		});
 		return rendering.promise;
 	}

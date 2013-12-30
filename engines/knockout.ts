@@ -5,33 +5,27 @@ var Deferred = Promises.Deferred;
 
 class Knockout extends Engine {
 
-	ko: any;
-	private _body: any;
-	private _willCompile: Promises.Deferred;
-
 	constructor(scriptPath?: string) {
 		super(scriptPath || './vendor/knockoutjs/index.js');
 	}
 
 	compile(source: string): Promises.Promise {
-		this._willCompile = new Deferred();
-		this.load(source).done(this.onWindow.bind(this));
-		return this._willCompile.promise;
-	}
-
-	private onWindow(window: any): void {
-		this.ko = window.ko;
-		this._body = window.document.body;
-		this._willCompile.resolve({
-			render: this.onRender.bind(this)
+		var compiling = new Deferred();
+		this.load(source).done((window: any) => {
+			compiling.resolve({
+				render: this.onRender.bind(this, window)
+			});
 		});
+		return compiling.promise;
 	}
 
-	private onRender(context: {}): Promises.Promise {
+	private onRender(window: any, context: {}): Promises.Promise {
 		var rendering = new Deferred();
 		setTimeout(() => {
-			this.ko.applyBindings(context);
-			rendering.resolve(this._body.innerHTML);
+			var ko = window.ko;
+			var body = window.document.body;
+			ko.applyBindings(context);
+			rendering.resolve(body.innerHTML);
 		});
 		return rendering.promise;
 	}
