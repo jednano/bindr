@@ -15,6 +15,7 @@ class Handlebars extends Engine {
 		setTimeout(() => {
 			this.load().done((window: any) => {
 				var hb = <HandlebarsStatic>window.Handlebars;
+				this.onHandlebars(hb);
 				var render = hb.compile(source);
 				compiling.resolve({
 					render: this.onRender.bind(this, render)
@@ -23,6 +24,8 @@ class Handlebars extends Engine {
 		});
 		return compiling.promise;
 	}
+
+	onHandlebars(hb: HandlebarsStatic) {}
 
 	private onRender(render: Function, context: {}): Promises.Promise {
 		var rendering = new Deferred();

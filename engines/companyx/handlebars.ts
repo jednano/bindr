@@ -1,4 +1,4 @@
-import _Handlebars = require('../../node/handlebars');
+import _Handlebars = require('../handlebars');
 
 
 class Handlebars extends _Handlebars {

@@ -12,7 +12,7 @@ by installing [Sublime Package Control][] and then the TypeScript Compiler.
 Now you're ready for TypeScript development.
 
 If you wish to provide an additional template engine, you'll want to consider
-adding one or all of the three possible engine types.
+adding one or both of the two possible engine types.
 
 
 ## JavaScript Library Template Engine
@@ -234,6 +234,21 @@ immediately return a promise and keep this Node engine non-blocking.
 Run the tests again and you should see the failing test now passes.
 
 
+## Node Library Template Engine
+
+These template engines run on top of Node; thus, do not require the DOM to
+operate. As such, the code is slightly less complicated. Please refer to
+existing engines under the [engines/node][] namespace for an example.
+
+
+## Extending Existing Engines
+
+You can extend existing engines with additional functionality. See
+[engines/companyx/node/handlebars][] for an example of creating a `link_to`
+helper.
+
+
+
 [Bower]: http://bower.io/
 [Bower's registry]: http://sindresorhus.com/bower-components/
 [vendor directory]: vendor
@@ -246,3 +261,5 @@ Run the tests again and you should see the failing test now passes.
 [Sublime Text]: http://www.sublimetext.com/
 [Sublime Package Control]: https://sublime.wbond.net/installation
 [DefinitelyTyped]: https://github.com/borisyankov/DefinitelyTyped
+[engines/node]: engines/node
+[engines/companyx/node/handlebars]: engines/companyx/node/handlebars

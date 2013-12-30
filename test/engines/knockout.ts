@@ -3,7 +3,12 @@
 import chai = require('chai');
 var expect = chai.expect;
 import Knockout = require('../../engines/knockout');
+import Ko = require('../../engines/ko');
 
+
+it('supports ko alias', () => {
+	expect(new Ko()).to.be.an.instanceOf(Knockout);
+});
 
 it('supports knockout template engine', done => {
 	var source = '<p data-bind="text: foo"></p>';

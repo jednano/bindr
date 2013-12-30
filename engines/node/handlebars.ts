@@ -9,6 +9,13 @@ class Handlebars extends Engine {
 
 	hb = hb;
 
+	constructor() {
+		super();
+		this.onHandlebars(hb);
+	}
+
+	onHandlebars(hb: HandlebarsStatic) {}
+
 	compile(source: string): Promises.Promise {
 		var compiling = new Deferred();
 		setTimeout(() => {

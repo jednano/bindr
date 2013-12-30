@@ -1,11 +1,11 @@
-﻿///<reference path='../../../common.ts'/>
+﻿///<reference path='../../common.ts'/>
 import chai = require('chai');
 var expect = chai.expect;
-import Handlebars = require('../../../../engines/companyx/node/handlebars');
-import Hbs = require('../../../../engines/companyx/node/hbs');
+import Handlebars = require('../../../engines/companyx/handlebars');
+import Hbs = require('../../../engines/companyx/hbs');
 
 
-describe('companyx/node/handlebars template engine', () => {
+describe('companyx/handlebars template engine', () => {
 
 	var hb;
 	before(() => {
