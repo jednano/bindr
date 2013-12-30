@@ -8,23 +8,22 @@ var Deferred = Promises.Deferred;
 class Handlebars extends Engine {
 
 	hb = hb;
-	private _render: Function;
 
 	compile(source: string): Promises.Promise {
-		this._render = this.hb.compile(source);
 		var compiling = new Deferred();
 		setTimeout(() => {
+			var render = this.hb.compile(source);
 			compiling.resolve({
-				render: this.onRender.bind(this)
+				render: this.onRender.bind(this, render)
 			});
 		});
 		return compiling.promise;
 	}
 
-	private onRender(context: {}): Promises.Promise {
+	private onRender(render: Function, context: {}): Promises.Promise {
 		var rendering = new Deferred();
 		setTimeout(() => {
-			rendering.resolve(this._render(context));
+			rendering.resolve(render(context));
 		});
 		return rendering.promise;
 	}
