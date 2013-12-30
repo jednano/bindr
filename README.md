@@ -1,14 +1,14 @@
 ﻿# bindr
 
-Bindr is a [Node.js][] service that handles template binding and nothing else.
-When used in tandem with a server-side technology such as [ASP.NET][], [PHP][],
-[Ruby on Rails][] or even [Express][], bindr enables you to handle template
-binding on both the back and the front end.
-
 [![Build Status][]](http://travis-ci.org/jedmao/bindr)
 [![Dependency Status][]](https://gemnasium.com/jedmao/bindr)
 [![NPM version][]](http://badge.fury.io/js/bindr)
 [![Views][]](https://sourcegraph.com/github.com/jedmao/bindr)
+
+Bindr is a [Node.js][] service that handles template binding and nothing else.
+When used in tandem with a server-side technology such as [ASP.NET][], [PHP][],
+[Ruby on Rails][] or even [Express][], bindr enables you to handle template
+binding on both the back and the front end.
 
 
 ## What is template binding?
