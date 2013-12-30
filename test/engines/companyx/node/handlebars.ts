@@ -4,7 +4,7 @@ var expect = chai.expect;
 import Handlebars = require('../../../../engines/companyx/node/handlebars');
 
 
-describe('volusion/node/handlebars template engine', () => {
+describe('companyx/node/handlebars template engine', () => {
 
 	var hb;
 	before(() => {
